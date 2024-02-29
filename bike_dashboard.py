@@ -1,7 +1,14 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
 import plotly.express as px
+plt.plot(data)
+plt.xlabel('X-axis label')
+plt.ylabel('Y-axis label')
+plt.title('Title')
+plt.show()
+
+# Menjadi ini
+st.line_chart(data)
 
 # Memuat data dari file CSV
 bike_data = pd.read_csv('bike_data_bersih.csv')
