@@ -5,7 +5,6 @@
 
 import streamlit as st
 import pandas as pd
-import plotly.express as px
 
 # Memuat data dari file CSV
 bike_data = pd.read_csv('bike_data_bersih.csv')
