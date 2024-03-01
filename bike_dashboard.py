@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 # Load the dataset
-data = pd.read_csv("bike_data_bersih.csv")
+data = pd.read_csv("main_data.csv")
 
 # Create a Streamlit app
 st.title("Bike Dashboard")
