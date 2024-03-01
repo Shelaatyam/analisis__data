@@ -20,6 +20,10 @@ average_usage_holiday = bike_data[bike_data['workingday'] == 0]['cnt'].mean()
 # Menghitung rata-rata penggunaan sepeda per hari dalam seminggu
 average_daily_usage = bike_data.groupby('weekday')['cnt'].mean().reset_index()
 
+# Membuat DataFrame untuk rata-rata penggunaan sepeda pada hari kerja dan hari libur
+average_daily_usage_workday = bike_data[bike_data['workingday'] == 1].groupby('weekday')['cnt'].mean().reset_index()
+average_daily_usage_holiday = bike_data[bike_data['workingday'] == 0].groupby('weekday')['cnt'].mean().reset_index()
+
 # Menambahkan judul dan header untuk dashboard
 st.title('Dashboard Penggunaan Sepeda')
 st.header('Pertanyaan 1: Jumlah Pengguna Aktif')
@@ -37,3 +41,14 @@ st.plotly_chart(fig)
 st.header('Pertanyaan 2: Pola Penggunaan Sepeda')
 st.write('Rata-rata Penggunaan Sepeda pada Hari Kerja: ', average_usage_workday)
 st.write('Rata-rata Penggunaan Sepeda pada Hari Libur: ', average_usage_holiday)
+
+# Membuat visualisasi menggunakan Plotly Express untuk pertanyaan kedua
+fig2 = px.bar(average_daily_usage_workday, x='weekday', y='cnt', title='Rata-rata Penggunaan Sepeda pada Hari Kerja')
+fig2.add_bar(x=average_daily_usage_holiday['weekday'], y=average_daily_usage_holiday['cnt'], name='Hari Libur')
+
+# Menambahkan label sumbu dan judul
+fig2.update_layout(xaxis_title='Hari', yaxis_title='Rata-rata Penggunaan Sepeda', barmode='group')
+
+# Menampilkan visualisasi
+st.subheader('Rata-rata Penggunaan Sepeda pada Hari Kerja vs Hari Libur')
+st.plotly_chart(fig2)
